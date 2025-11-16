@@ -9,6 +9,8 @@ import dev.corazza.mytasks.entity.Task
 
 class MainActivity : AppCompatActivity() {
   private lateinit var binding: ActivityMainBinding
+  private lateinit var adapter: ListAdapter
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -17,29 +19,14 @@ class MainActivity : AppCompatActivity() {
     initComponents()
   }
 
+  override fun onResume() {
+    super.onResume()
+    //adapter.addItem(Task(title="Task teste", date="16/11/2025"))
+  }
+
   private fun initComponents() {
-    val adapter = ListAdapter()
+    adapter = ListAdapter()
     binding.rvMain.adapter = adapter
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
-    adapter.addItem(Task(title="Primeira Task", date = "14/11/2025"))
 
     binding.fabNew.setOnClickListener {
       startActivity(Intent(this, FormActivity::class.java))

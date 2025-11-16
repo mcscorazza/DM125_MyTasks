@@ -7,4 +7,6 @@
     <string name="time">Time</string>
 
     <string name="save">Save</string>
+
+    <string name="title_required">Title is required!</string>
 </resources>
