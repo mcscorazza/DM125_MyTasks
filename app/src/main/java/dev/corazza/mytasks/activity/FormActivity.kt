@@ -1,9 +1,9 @@
 package dev.corazza.mytasks.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dev.corazza.mytasks.R
@@ -12,10 +12,8 @@ import dev.corazza.mytasks.entity.Task
 import dev.corazza.mytasks.service.TaskService
 
 class FormActivity : AppCompatActivity() {
-
   private lateinit var binding: ActivityFormBinding
-
-  private lateinit var taskService: TaskService
+  private val taskService: TaskService by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -43,8 +41,13 @@ class FormActivity : AppCompatActivity() {
         binding.layoutTitle.error= ContextCompat.getString(this, R.string.title_required)
       } else {
         val task = Task(title = binding.etTitle.text.toString())
-        taskService.create(task)
-        finish()
+        taskService.create(task).observe(this) { response ->
+          if (response.error) {
+            TODO()
+          } else {
+            finish()
+          }
+        }
       }
     }
   }

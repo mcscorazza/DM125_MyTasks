@@ -1,5 +1,6 @@
 package dev.corazza.mytasks.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,9 +32,11 @@ class ListAdapter(): RecyclerView.Adapter<ItemViewHolder>() {
 
   override fun getItemCount() = items.size
 
+  @SuppressLint("NotifyDataSetChanged")
   fun setData(data: List<Task>) {
     items.clear()
     items.addAll(data)
+    notifyDataSetChanged()
   }
 
   fun addItem(item: Task) {

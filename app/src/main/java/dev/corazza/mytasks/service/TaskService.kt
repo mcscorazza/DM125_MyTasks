@@ -21,6 +21,4 @@ class TaskService : ViewModel() {
     taskRepository.list().enqueue(ServiceCallback<List<Task>>(tasksLiveData))
     return tasksLiveData
   }
-
-
 }
