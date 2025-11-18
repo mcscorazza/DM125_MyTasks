@@ -9,4 +9,6 @@
     <string name="save">Save</string>
 
     <string name="title_required">Title is required!</string>
+    <string name="server_error">Not possible to connect to server</string>
+    <string name="empty_list">No Tasks available.\nClick to button to add one</string>
 </resources>

@@ -11,7 +11,8 @@ class RetrofitService {
 
     private val taskRepository: TaskRepository
     companion object {
-        val BASE_URL = "http://192.168.15.101:8080"
+      // val BASE_URL = "http://192.168.15.101:8080"
+      const val BASE_URL = "http://172.29.31.40:8080"
     }
 
     init {
