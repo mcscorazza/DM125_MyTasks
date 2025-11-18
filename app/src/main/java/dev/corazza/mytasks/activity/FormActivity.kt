@@ -8,10 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dev.corazza.mytasks.R
 import dev.corazza.mytasks.databinding.ActivityFormBinding
+import dev.corazza.mytasks.entity.Task
+import dev.corazza.mytasks.service.TaskService
 
 class FormActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityFormBinding
+
+  private lateinit var taskService: TaskService
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -38,6 +42,8 @@ class FormActivity : AppCompatActivity() {
       if (binding.etTitle.text.isNullOrEmpty()) {
         binding.layoutTitle.error= ContextCompat.getString(this, R.string.title_required)
       } else {
+        val task = Task(title = binding.etTitle.text.toString())
+        taskService.create(task)
         finish()
       }
     }
