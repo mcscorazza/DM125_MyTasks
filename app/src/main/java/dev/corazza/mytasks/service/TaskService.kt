@@ -1,5 +1,6 @@
 package dev.corazza.mytasks.service
 
+import android.content.res.loader.ResourcesProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,5 +21,13 @@ class TaskService : ViewModel() {
     val tasksLiveData = MutableLiveData<ResponseDto<List<Task>>>()
     taskRepository.list().enqueue(ServiceCallback<List<Task>>(tasksLiveData))
     return tasksLiveData
+  }
+
+  fun delete(id: Long) : LiveData<ResponseDto<Void>> {
+    val liveData = MutableLiveData<ResponseDto<Void>>()
+
+    taskRepository.delete(id).enqueue(ServiceCallback(liveData))
+
+    return liveData
   }
 }

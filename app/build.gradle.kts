@@ -48,7 +48,9 @@ dependencies {
   implementation(libs.converter.gson)
   implementation(libs.logging.interceptor)
   implementation(libs.lifecycle.viewmodel.ktx)
+  implementation(libs.swipe.refresh.layout)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
+
 }
