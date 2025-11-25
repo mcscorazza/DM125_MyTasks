@@ -53,12 +53,17 @@ class MainActivity : AppCompatActivity() {
           }
         }
       }
-
     })).attachToRecyclerView(binding.rvMain)
+
+    binding.srlMain.setOnRefreshListener {
+      getTasks()
+    }
   }
 
     private fun getTasks() {
     taskService.list().observe(this){ response ->
+      binding.srlMain.isRefreshing = false
+
        response.value?.let {
           adapter.setData(it)
        } ?: run {
