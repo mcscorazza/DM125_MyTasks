@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="dev.corazza.mytasks" />
+                  <option name="mobileSdkAppId" value="1:798286524990:android:42708f04dc003a9d7b976f" />
+                  <option name="projectId" value="mytasks-375ab" />
+                  <option name="projectNumber" value="798286524990" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

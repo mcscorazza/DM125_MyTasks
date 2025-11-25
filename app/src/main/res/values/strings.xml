@@ -11,4 +11,7 @@
     <string name="title_required">Title is required!</string>
     <string name="server_error">Not possible to connect to server</string>
     <string name="empty_list">No Tasks available.\nClick to button to add one</string>
+    
+    <string name="permission">Permission</string>
+    <string name="notification_permission_rationale">App will send you notifications when new tasks are pending. </string>
 </resources>

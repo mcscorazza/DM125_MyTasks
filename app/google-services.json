@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798286524990",
+    "project_id": "mytasks-375ab",
+    "storage_bucket": "mytasks-375ab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798286524990:android:42708f04dc003a9d7b976f",
+        "android_client_info": {
+          "package_name": "dev.corazza.mytasks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUnGmAfVEIL--wt9_zTAjRsfUdfAtngxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

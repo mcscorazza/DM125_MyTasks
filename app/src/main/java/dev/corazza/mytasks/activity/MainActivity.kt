@@ -1,9 +1,15 @@
 package dev.corazza.mytasks.activity
+import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -25,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
     initComponents()
+    askNotificationPermission()
   }
 
   override fun onResume() {
@@ -72,4 +79,30 @@ class MainActivity : AppCompatActivity() {
         }
       }
     }
+
+  private fun askNotificationPermission() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+        PackageManager.PERMISSION_GRANTED
+      ) {
+        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+      }
+    }
+  }
+
+  private val requestPermissionLauncher = registerForActivityResult(
+    ActivityResultContracts.RequestPermission(),
+  ) { isGranted: Boolean ->
+    if (!isGranted) {
+      if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+        AlertDialog.Builder(this)
+          .setTitle(R.string.permission)
+          .setMessage(R.string.notification_permission_rationale)
+          .setPositiveButton(android.R.string.ok, null)
+          .setNegativeButton(android.R.string.cancel, null)
+          .create()
+          .show()
+      }
+    }
+  }
 }
