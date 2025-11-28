@@ -1,10 +1,11 @@
 package dev.corazza.mytasks.activity
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.firebase.FirebaseApp
 import dev.corazza.mytasks.R
 import dev.corazza.mytasks.adapter.ListAdapter
 import dev.corazza.mytasks.adapter.TouchCallback
@@ -30,13 +32,28 @@ class MainActivity : AppCompatActivity() {
     enableEdgeToEdge()
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    // FirebaseApp.initializeApp(this)
+
     initComponents()
     askNotificationPermission()
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    if(item.itemId == R.id.preferences) {
+      startActivity(Intent(this, PreferenceActivity::class.java))
+    }
+    return super.onOptionsItemSelected(item)
   }
 
   override fun onResume() {
     super.onResume()
     getTasks()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.main_menu, menu)
+    return super.onCreateOptionsMenu(menu)
   }
 
   private fun initComponents() {

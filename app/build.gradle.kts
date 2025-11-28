@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.gms.google.services)
 }
 
 android {
@@ -52,6 +53,8 @@ dependencies {
   implementation(platform(libs.firebase.bom))
   implementation(libs.firebase.analytics)
   implementation(libs.firebase.messaging)
+  implementation(libs.preference.ktx)
+  implementation(libs.androidx.fragment)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
