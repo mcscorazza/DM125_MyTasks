@@ -16,6 +16,7 @@ import dev.corazza.mytasks.service.TaskService
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 class FormActivity : AppCompatActivity() {
   private lateinit var binding: ActivityFormBinding
@@ -53,17 +54,37 @@ class FormActivity : AppCompatActivity() {
   private fun initComponents() {
     binding.btSave.setOnClickListener {
       binding.layoutTitle.error = null
+      binding.layoutDate.error = null
+      binding.layoutTime.error = null
+
+      var isValid = true
 
       if (binding.etTitle.text.isNullOrEmpty()) {
         binding.layoutTitle.error= ContextCompat.getString(this, R.string.title_required)
-      } else {
-        val date = if (binding.etDate.hasValue()) {
-          LocalDate.parse(binding.etDate.textValue(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-        } else null
-        val time = if (binding.etTime.hasValue()) {
-          LocalTime.parse(binding.etTime.textValue(), DateTimeFormatter.ofPattern("HH:mm"))
-        } else null
+        isValid = false
+      }
 
+      var date: LocalDate? = null
+      if (binding.etDate.hasValue()) {
+        try {
+          date = LocalDate.parse(binding.etDate.textValue(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        } catch (e: DateTimeParseException) {
+          binding.layoutDate.error = ContextCompat.getString(this, R.string.invalid_date)
+          isValid = false
+        }
+      }
+
+      var time: LocalTime? = null
+      if (binding.etTime.hasValue()) {
+        try {
+          time = LocalTime.parse(binding.etTime.textValue(), DateTimeFormatter.ofPattern("HH:mm"))
+        } catch (e: DateTimeParseException) {
+          binding.layoutTime.error = ContextCompat.getString(this, R.string.invalid_time)
+          isValid = false
+        }
+      }
+
+      if (isValid) {
         val task = Task(
           id = taskId,
           title = binding.etTitle.textValue(),
@@ -87,7 +108,6 @@ class FormActivity : AppCompatActivity() {
             } else {
               finish()
             }
-
           }
         }
       }
