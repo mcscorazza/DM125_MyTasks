@@ -17,6 +17,11 @@ class TaskService : ViewModel() {
     return taskLiveData
   }
 
+  fun update(task: Task): LiveData<ResponseDto<Task>> {
+    val taskLiveData = MutableLiveData<ResponseDto<Task>>()
+    taskRepository.update(task.id!!, task).enqueue(ServiceCallback(taskLiveData))
+    return taskLiveData
+  }
   fun list() : LiveData<ResponseDto<List<Task>>> {
     val tasksLiveData = MutableLiveData<ResponseDto<List<Task>>>()
     taskRepository.list().enqueue(ServiceCallback<List<Task>>(tasksLiveData))
@@ -25,9 +30,13 @@ class TaskService : ViewModel() {
 
   fun delete(id: Long) : LiveData<ResponseDto<Void>> {
     val liveData = MutableLiveData<ResponseDto<Void>>()
-
     taskRepository.delete(id).enqueue(ServiceCallback(liveData))
-
     return liveData
+  }
+
+  fun complete(id:Long) : LiveData<ResponseDto<Task>> {
+    val taskLiveData = MutableLiveData<ResponseDto<Task>>()
+    taskRepository.complete(id).enqueue(ServiceCallback(taskLiveData))
+    return taskLiveData
   }
 }

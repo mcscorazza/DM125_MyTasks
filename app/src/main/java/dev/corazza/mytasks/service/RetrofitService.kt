@@ -1,18 +1,23 @@
 package dev.corazza.mytasks.service
 
+import com.google.gson.GsonBuilder
+import dev.corazza.mytasks.adapter.LocalDateAdapter
+import dev.corazza.mytasks.adapter.LocalTImeAdapter
 import dev.corazza.mytasks.repository.TaskRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
+import java.time.LocalTime
 
 class RetrofitService {
 
     private val taskRepository: TaskRepository
     companion object {
-      //const val BASE_URL = "http://10.0.2.2:8080"
-      const val BASE_URL = "http://127.0.0.1:8080"
+      const val BASE_URL = "http://10.0.2.2:8080"
+//      const val BASE_URL = "http://127.0.0.1:8080"
     }
 
     init {
@@ -36,6 +41,10 @@ class RetrofitService {
     }
 
     private fun createConverter() : Converter.Factory {
-        return GsonConverterFactory.create()
+        val gson = GsonBuilder()
+            .registerTypeAdapter(LocalDate::class.java, LocalDateAdapter())
+            .registerTypeAdapter(LocalTime::class.java, LocalTImeAdapter())
+            .create()
+        return GsonConverterFactory.create(gson)
     }
 }

@@ -20,4 +20,18 @@
     <string name="daily_notification_on">You\'ll receive a Daily Notification.</string>
     <string name="daily_notification_off">You\'ll not receive a Daily Notification.</string>
 
+    <string name="mark_completed">Mark task as completed!</string>
+
+    <string name="create_error">Error on Create the Task</string>
+    <string name="update_error">Error on Update the Task</string>
+    
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="create_account">Create Account</string>
+    <string name="empty_email">Please fill the e-mail</string>
+    <string name="empty_pass">Please fill the password</string>
+    <string name="account_created_fail">Error to create Account</string>
+    <string name="login_fail">Error to Login</string>
 </resources>

@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.corazza.mytasks.R
 import dev.corazza.mytasks.databinding.ListItemBinding
 import dev.corazza.mytasks.entity.Task
+import dev.corazza.mytasks.listener.ClickListener
 
 class ListAdapter(
   private val context: Context,
-  private val emptyMessage: TextView): RecyclerView.Adapter<ItemViewHolder>() {
+  private val emptyMessage: TextView,
+  private val listener: ClickListener
+  ): RecyclerView.Adapter<ItemViewHolder>() {
 
   private val items = mutableListOf<Task>()
 
@@ -27,7 +30,7 @@ class ListAdapter(
       parent,
       false
     )
-    return ItemViewHolder(binding)
+    return ItemViewHolder(binding, listener)
   }
 
   override fun onBindViewHolder(

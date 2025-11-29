@@ -15,7 +15,6 @@ lifecycle-viewmodel-ktx = "2.10.0"
 swipe-refresh-layout = "1.1.0"
 firebase-bom = "34.6.0"
 preference-ktx = "1.2.1"
-fragment = "1.8.9"
 gms-google-services = "4.4.4"
 
 
@@ -37,8 +36,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
-androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
-
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 
 
 [plugins]

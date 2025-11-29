@@ -14,7 +14,7 @@ class PreferenceActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    //enableEdgeToEdge()
+    enableEdgeToEdge()
 
     binding = ActivityPreferenceBinding.inflate(layoutInflater)
     setContentView(binding.root)

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,12 +14,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.firebase.FirebaseApp
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import dev.corazza.mytasks.R
 import dev.corazza.mytasks.adapter.ListAdapter
 import dev.corazza.mytasks.adapter.TouchCallback
 import dev.corazza.mytasks.databinding.ActivityMainBinding
+import dev.corazza.mytasks.entity.Task
+import dev.corazza.mytasks.listener.ClickListener
 import dev.corazza.mytasks.listener.SwipeListener
 import dev.corazza.mytasks.service.TaskService
 
@@ -33,21 +38,27 @@ class MainActivity : AppCompatActivity() {
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    // FirebaseApp.initializeApp(this)
-
     initComponents()
+
     askNotificationPermission()
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    if(item.itemId == R.id.preferences) {
-      startActivity(Intent(this, PreferenceActivity::class.java))
+    when(item.itemId) {
+      R.id.preferences -> startActivity(Intent(this, PreferenceActivity::class.java))
+      R.id.logout -> logout()
     }
+
+
     return super.onOptionsItemSelected(item)
   }
 
   override fun onResume() {
     super.onResume()
+
+    val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+    val b = preferences.getBoolean("daily_notification", false)
+    Log.e("pref", "Preference: $b")
     getTasks()
   }
 
@@ -58,7 +69,22 @@ class MainActivity : AppCompatActivity() {
 
   private fun initComponents() {
     binding.tvMessage.visibility = View.INVISIBLE
-    adapter = ListAdapter(this, binding.tvMessage)
+    adapter = ListAdapter(this, binding.tvMessage, object: ClickListener {
+      override fun onComplete(id: Long) {
+        taskService.complete(id).observe(this@MainActivity) { response ->
+          if (!response.error) {
+            getTasks()
+          }
+        }
+      }
+
+      override fun onClick(task: Task) {
+        val intent = Intent(this@MainActivity, FormActivity::class.java)
+        intent.putExtra("task", task)
+        startActivity(intent)
+      }
+
+    })
     binding.rvMain.adapter = adapter
 
     binding.fabNew.setOnClickListener {
@@ -97,6 +123,13 @@ class MainActivity : AppCompatActivity() {
       }
     }
 
+  private fun logout() {
+    Firebase.auth.signOut()
+    val intent = Intent(this, LoginActivity::class.java).apply {
+      flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+    startActivity(intent)
+  }
   private fun askNotificationPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
       if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
