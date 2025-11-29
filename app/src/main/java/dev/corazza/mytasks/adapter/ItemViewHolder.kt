@@ -28,7 +28,7 @@ class ItemViewHolder(
 
     binding.root.setOnCreateContextMenuListener { menu, _, _ ->
       menu.add(R.string.mark_completed).setOnMenuItemClickListener {
-        task.id?.let { id -> listener.onComplete(task.id) }
+        task.id?.let { id -> listener.onComplete(id) }
         true
       }
     }

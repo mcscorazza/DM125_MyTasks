@@ -1,6 +1,5 @@
 package dev.corazza.mytasks.service
 
-import android.content.res.loader.ResourcesProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
