@@ -83,6 +83,7 @@
         app:layout_constraintStart_toStartOf="@id/layoutTitle"
         app:layout_constraintEnd_toEndOf="@id/layoutTitle"
         android:layout_marginTop="20dp"
+        android:paddingVertical="16dp"
         android:text="@string/save"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
