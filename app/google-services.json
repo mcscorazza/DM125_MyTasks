@@ -12,7 +12,20 @@
           "package_name": "dev.corazza.mytasks"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "798286524990-lbr1atgcr542bo6etm79vde90diobnee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.corazza.mytasks",
+            "certificate_hash": "fc2a9df575e36a56ad0056e384bb1892085e9d04"
+          }
+        },
+        {
+          "client_id": "798286524990-tlcusqrec9989d8ciagufo3j8s2bivv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDUnGmAfVEIL--wt9_zTAjRsfUdfAtngxo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798286524990-tlcusqrec9989d8ciagufo3j8s2bivv1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

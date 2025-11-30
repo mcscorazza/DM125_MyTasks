@@ -40,8 +40,12 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="create_account">Create Account</string>
+    <string name="google_login">Google Account</string>
     <string name="empty_email">Please fill the e-mail</string>
     <string name="empty_pass">Please fill the password</string>
     <string name="account_created_fail">Error to create Account</string>
     <string name="login_fail">Error to Login</string>
+
+    <string name="google_error">Error to connect to Google</string>
+    <string name="firebase_error">Error to connect with Firebase</string>
 </resources>

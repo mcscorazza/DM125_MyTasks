@@ -16,6 +16,8 @@ swipe-refresh-layout = "1.1.0"
 firebase-bom = "34.6.0"
 preference-ktx = "1.2.1"
 gms-google-services = "4.4.4"
+credentials = "1.5.0"
+googleId = "1.1.1"
 
 
 [libraries]
@@ -37,7 +39,9 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
-
+androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleId" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

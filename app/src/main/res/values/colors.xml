@@ -7,5 +7,6 @@
 
     <color name="orange">#F57C00</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="ic_launcher_background">#054862</color>
 </resources>
