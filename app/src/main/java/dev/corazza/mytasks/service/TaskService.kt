@@ -27,6 +27,12 @@ class TaskService : ViewModel() {
     return tasksLiveData
   }
 
+  fun read(id: Long): LiveData<ResponseDto<Task>> {
+    val taskLiveData = MutableLiveData<ResponseDto<Task>>()
+    taskRepository.read(id).enqueue(ServiceCallback(taskLiveData))
+    return taskLiveData
+  }
+
   fun delete(id: Long) : LiveData<ResponseDto<Void>> {
     val liveData = MutableLiveData<ResponseDto<Void>>()
     taskRepository.delete(id).enqueue(ServiceCallback(liveData))

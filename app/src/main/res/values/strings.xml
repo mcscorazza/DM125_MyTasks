@@ -11,6 +11,7 @@
     <string name="title_required">Title is required!</string>
     <string name="invalid_date">Date is invalid! Use: (00/00/0000)</string>
     <string name="invalid_time">Time is invalid! Use: (00:00)</string>
+    <string name="read_error">Error to read data from Task</string>
     <string name="server_error">Not possible to connect to server</string>
     <string name="empty_list">No Tasks available.\nClick to button to add one</string>
     
@@ -21,6 +22,10 @@
     <string name="daily_notification">Daily Notifications</string>
     <string name="daily_notification_on">You\'ll receive a Daily Notification.</string>
     <string name="daily_notification_off">You\'ll not receive a Daily Notification.</string>
+
+    <string name="date_format">Date Format</string>
+    <string name="date_format_on">Full Format (00 de janeiro de 0000)</string>
+    <string name="date_format_off">Short Format (00/00/0000)</string>
 
     <string name="mark_completed">Mark task as completed!</string>
 

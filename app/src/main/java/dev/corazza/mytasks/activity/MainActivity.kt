@@ -37,9 +37,7 @@ class MainActivity : AppCompatActivity() {
     enableEdgeToEdge()
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
     initComponents()
-
     askNotificationPermission()
   }
 
@@ -48,14 +46,11 @@ class MainActivity : AppCompatActivity() {
       R.id.preferences -> startActivity(Intent(this, PreferenceActivity::class.java))
       R.id.logout -> logout()
     }
-
-
     return super.onOptionsItemSelected(item)
   }
 
   override fun onResume() {
     super.onResume()
-
     val preferences = PreferenceManager.getDefaultSharedPreferences(this)
     val b = preferences.getBoolean("daily_notification", false)
     Log.e("pref", "Preference: $b")
@@ -77,10 +72,9 @@ class MainActivity : AppCompatActivity() {
           }
         }
       }
-
       override fun onClick(task: Task) {
         val intent = Intent(this@MainActivity, FormActivity::class.java)
-        intent.putExtra("task", task)
+        intent.putExtra("taskId", task.id)
         startActivity(intent)
       }
 

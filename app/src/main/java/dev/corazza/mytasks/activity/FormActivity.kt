@@ -32,15 +32,12 @@ class FormActivity : AppCompatActivity() {
 
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    intent.extras?.getSerializable("task")?.let { extra ->
-      val task = extra as Task
-      taskId = task.id
-      binding.etTitle.setText(task.title)
-      binding.etDescription.setText(task.description)
-      binding.etDate.setText(task.formatDate())
-      binding.etTime.setText(task.formatTime())
-    }
+    val id = intent.getLongExtra("taskId", 0L)
 
+    if (id > 0) {
+      taskId = id
+      readTask(id)
+    }
     initComponents()
   }
 
@@ -109,6 +106,22 @@ class FormActivity : AppCompatActivity() {
               finish()
             }
           }
+        }
+      }
+    }
+  }
+  private fun readTask(id: Long) {
+    taskService.read(id).observe(this) { response ->
+      if (response.error) {
+        showAlert(R.string.read_error)
+        finish()
+      } else {
+        val task = response.value
+        task?.let { t ->
+          binding.etTitle.setText(t.title)
+          binding.etDescription.setText(t.description)
+          binding.etDate.setText(t.formatDate())
+          binding.etTime.setText(t.formatTime())
         }
       }
     }
