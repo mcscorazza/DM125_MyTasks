@@ -5,6 +5,7 @@
     <string name="description">Description</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="no_date">Task without deadline</string>
 
     <string name="save">Save</string>
 
