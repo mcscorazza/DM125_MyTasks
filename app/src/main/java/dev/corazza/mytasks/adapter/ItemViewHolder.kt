@@ -6,6 +6,7 @@ import dev.corazza.mytasks.R
 import dev.corazza.mytasks.databinding.ListItemBinding
 import dev.corazza.mytasks.entity.Task
 import dev.corazza.mytasks.listener.ClickListener
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -17,11 +18,16 @@ class ItemViewHolder(
   fun setData(task : Task) {
     binding.tvTitle.text = task.title
 
-    if(task.completed) {
-      binding.tvTitle.setBackgroundResource(R.color.green)
-    } else {
-      binding.tvTitle.setBackgroundResource(R.color.blue)
+    val today = LocalDate.now()
+
+    val colorResource = when {
+      task.completed -> R.color.green
+      task.date == null -> R.color.blue
+      task.date.isBefore(today) -> R.color.red
+      task.date.isEqual(today) -> R.color.yellow
+      else -> R.color.blue
     }
+    binding.tvTitle.setBackgroundResource(colorResource)
 
     val context = binding.root.context
     val prefs = PreferenceManager.getDefaultSharedPreferences(context)
@@ -36,8 +42,8 @@ class ItemViewHolder(
       val locale = Locale.forLanguageTag("pt-BR")
       val formatter = DateTimeFormatter.ofPattern(pattern, locale)
       val dateStr = task.date.format(formatter)
-      val timeStr = task.time?.let { " | $it" } ?: ""
-      binding.tvDate.text = "$dateStr$timeStr"
+      val timeStr = task.time?.let { "$it" } ?: ""
+      binding.tvDate.text = "$dateStr | $timeStr"
     } else {
       binding.tvDate.text = ""
     }
