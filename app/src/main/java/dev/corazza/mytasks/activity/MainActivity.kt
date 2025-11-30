@@ -85,17 +85,30 @@ class MainActivity : AppCompatActivity() {
       startActivity(Intent(this, FormActivity::class.java))
     }
 
-    ItemTouchHelper(TouchCallback(object: SwipeListener {
+    ItemTouchHelper(TouchCallback(object : SwipeListener {
       override fun onSwipe(position: Int) {
-        adapter.getItem(position).id?.let {
-          taskService.delete(it).observe(this@MainActivity){ response ->
-            if(response.error) {
-              adapter.notifyItemChanged(position)
-            } else {
-              adapter.removeItem(position)
+        val task = adapter.getItem(position)
+
+        AlertDialog.Builder(this@MainActivity)
+          .setTitle(R.string.delete_title)
+          .setMessage(R.string.delete_confirm)
+          .setPositiveButton(android.R.string.yes) { _, _ ->
+            task.id?.let { id ->
+              taskService.delete(id).observe(this@MainActivity) { response ->
+                if (response.error) {
+                  adapter.notifyItemChanged(position)
+                } else {
+                  adapter.removeItem(position)
+                }
+              }
             }
           }
-        }
+          .setNegativeButton(android.R.string.no) { dialog, _ ->
+            adapter.notifyItemChanged(position)
+            dialog.dismiss()
+          }
+          .setCancelable(false)
+          .show()
       }
     })).attachToRecyclerView(binding.rvMain)
 
